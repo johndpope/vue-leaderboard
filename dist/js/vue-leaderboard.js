@@ -244,7 +244,7 @@
       avatar: Avatar
     },
     props: {
-      board: {
+      data: {
         type: Array,
         "default": function _default() {
           return [{
@@ -539,7 +539,7 @@
         return "transform:scale(" + this.scaleNumber + ");top:-" + this.offsetTop + "px";
       },
       top3: function top3() {
-        var top3 = this.board.splice(0, 3);
+        var top3 = this.data.splice(0, 3);
         var top_1 = top3[0];
         var top_2 = top3[1];
         var top_3 = top3[2];
@@ -553,7 +553,7 @@
         return [top_1, top_2, top_3];
       },
       belowTop3: function belowTop3() {
-        return this.board;
+        return this.data;
       }
     },
     methods: {
@@ -585,11 +585,11 @@
     /* style */
     const __vue_inject_styles__$1 = function (inject) {
       if (!inject) return
-      inject("data-v-17948768_0", { source: ".leaderboard__[data-v-17948768]{max-width:1400px;margin:0 auto;position:relative;height:100vh}.leaderboard__ .leaderboard__content[data-v-17948768]{min-height:100%}.leaderboard__ .leaderboard__card_top .leaderboard__number[data-v-17948768]{display:block;font-size:20px}.leaderboard__ .leaderboard__card[data-v-17948768]{padding:10px 20px;border:1px solid rgba(0,0,0,.1)}.leaderboard__ .leaderboard__card .leaderboard__number[data-v-17948768]{font-size:20px}", map: undefined, media: undefined });
+      inject("data-v-54e4a87e_0", { source: ".leaderboard__[data-v-54e4a87e]{max-width:1400px;margin:0 auto;position:relative;height:100vh}.leaderboard__ .leaderboard__content[data-v-54e4a87e]{min-height:100%}.leaderboard__ .leaderboard__card_top .leaderboard__number[data-v-54e4a87e]{display:block;font-size:20px}.leaderboard__ .leaderboard__card[data-v-54e4a87e]{padding:10px 20px;border:1px solid rgba(0,0,0,.1)}.leaderboard__ .leaderboard__card .leaderboard__number[data-v-54e4a87e]{font-size:20px}", map: undefined, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$1 = "data-v-17948768";
+    const __vue_scope_id__$1 = "data-v-54e4a87e";
     /* module identifier */
     const __vue_module_identifier__$1 = undefined;
     /* functional template */

@@ -180,7 +180,7 @@ export default {
     avatar: Avatar
   },
   props: {
-    board: {
+    data: {
       type: Array,
       default: () => [
         {
@@ -501,7 +501,7 @@ export default {
       );
     },
     top3: function() {
-      let top3 = this.board.splice(0, 3);
+      let top3 = this.data.splice(0, 3);
       let top_1 = top3[0];
       let top_2 = top3[1];
       let top_3 = top3[2];
@@ -515,7 +515,7 @@ export default {
       return [top_1, top_2, top_3];
     },
     belowTop3: function() {
-      return this.board;
+      return this.data;
     }
   },
   methods: {
