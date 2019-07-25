@@ -21,6 +21,7 @@
   display: block;
   overflow: hidden;
   border-style:solid;
+  background: #ffffff;
   &.border-default{
     border-color:rgba(0, 0, 0, 0.1);
   }

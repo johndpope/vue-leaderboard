@@ -1,143 +1,161 @@
 <template>
-  <div class="leaderboard__" :style="scale">
-    <div
-      class="row no-gutters py-3 align-items-center leaderboard__content"
-      ref="leaderBoard"
-    >
-      <div class="col-12">
-        <div
-          class="row no-gutters justify-content-center align-items-end d-none d-md-flex mb-3"
-        >
-          <div v-for="(team, index) in top3" class="col-auto px-4">
-            <div class="leaderboard__card_top text-center">
-              <span class="leaderboard__number mb-1">{{
-                handleCountTop3(index)
-              }}</span>
-              <div v-if="handleCountTop3(index) === 1">
-                <avatar
-                  :url="team.avatar"
-                  :size="140"
-                  type="border-success"
-                  :bWidth="4"
-                ></avatar>
-              </div>
-              <div v-else>
-                <avatar
-                  :url="team.avatar"
-                  :size="100"
-                  type="border-warning"
-                  :bWidth="4"
-                ></avatar>
-              </div>
-              <p class="mt-2 mb-0 small">{{ team.team_name }}</p>
-              <div style="line-height: 1;">
-                <p class="text-success text-nowrap m-0 font-weight-bold">
-                  H <span class="font-weight-normal">{{ team.hourly }}</span>
+  <div class="leaderboard__wrapper">
+    <div class="leaderboard__" :style="scale">
+      <div
+        class="row no-gutters py-3 align-items-center leaderboard__content"
+        ref="leaderBoard"
+      >
+        <div class="col-12">
+          <div
+            class="row no-gutters justify-content-center align-items-end d-none d-md-flex mb-3"
+          >
+            <div v-for="(team, index) in top3" class="col-auto px-4">
+              <div class="leaderboard__card_top text-center">
+                <span class="leaderboard__number mb-3">{{
+                  handleCountTop3(index)
+                }}</span>
+                <div v-if="handleCountTop3(index) === 1">
+                  <div class="position-relative">
+                    <img
+                      :src="icon.success"
+                      style="width: 250px;position: absolute;left: -42px;top: -55px;"
+                    />
+                    <avatar
+                      :url="team.avatar"
+                      :size="140"
+                      type="border-success"
+                      :bWidth="4"
+                    ></avatar>
+                  </div>
+                </div>
+                <div v-else>
+                  <div class="position-relative">
+                    <img
+                      v-if="handleCountTop3(index) === 2"
+                      :src="icon.warning"
+                      style="width: 190px;position: absolute;left: 12px;top: -45px;"
+                    />
+                    <img
+                      v-else
+                      :src="icon.warning"
+                      style="width: 190px;position: absolute;left: -28px;top: -45px;"
+                    />
+                    <avatar
+                      :url="team.avatar"
+                      :size="100"
+                      type="border-warning"
+                      :bWidth="4"
+                    ></avatar>
+                  </div>
+                </div>
+                <p class="mt-4 mb-0 font-weight-bold">
+                  {{ team.team_name }}
                 </p>
-                <p class="text-danger text-nowrap m-0 font-weight-bold">
-                  P&L
-                  <span class="font-weight-normal">{{ team.profit }}</span>
-                </p>
+                <div style="line-height: 1;">
+                  <p class="text-success h5 text-nowrap m-0 font-weight-bold">
+                    H {{ team.hourly }}
+                  </p>
+                  <p class="text-danger text-nowrap mt-1 mb-0">
+                    P&L {{ team.profit }}
+                  </p>
+                </div>
+                <p class="m-0 text-muted">{{ team.team_lead }}</p>
               </div>
-              <small class="text-muted">{{ team.team_lead }}</small>
             </div>
           </div>
-        </div>
-        <div class="row no-gutters d-flex d-md-none" style="margin: 0 -.5em">
-          <div
-            v-for="(team, index) in top3Normal"
-            class=" col-md-6 col-lg-4 col-xl-3 mt-md-3 px-2"
-            :class="{ 'mt-3': index != 0 }"
-          >
-            <div class="leaderboard__card" :class="{'border-success':index === 0,'border-warning':index !== 0}">
-              <div class="row no-gutters align-items-center">
-                <div class="col-12">
-                  <div class="position-relative">
-                    <div
-                      class="position-absolute"
-                      style="left: 0px;margin-top: 21px"
-                    >
-                      <span class="leaderboard__number">{{ index + 1 }}</span>
-                    </div>
-                    <div
-                      class="position-absolute"
-                      style="left: 35px;margin-top: 6px"
-                    >
-                      <avatar :url="team.avatar" :size="60"></avatar>
-                    </div>
-                    <div style="padding-left:105px">
-                      <p
-                        class="m-0 small text-nowrap"
-                        style="overflow: hidden;text-overflow: ellipsis"
+          <div class="row no-gutters d-flex d-md-none" style="margin: 0 -.5em">
+            <div
+              v-for="(team, index) in top3Normal"
+              class=" col-md-6 col-lg-4 col-xl-3 mt-md-3 px-2"
+              :class="{ 'mt-3': index != 0 }"
+            >
+              <div
+                class="leaderboard__card"
+                :class="{
+                  'border-success': index === 0,
+                  'border-warning': index !== 0
+                }"
+              >
+                <div class="row no-gutters align-items-center">
+                  <div class="col-12">
+                    <div class="position-relative">
+                      <div
+                        class="position-absolute"
+                        style="left: 0px;margin-top: 32px"
                       >
-                        {{ team.team_name }}
-                      </p>
-                      <div style="line-height: 1">
-                        <p
-                          class="text-success text-nowrap m-0 font-weight-bold"
-                        >
-                          H
-                          <span class="font-weight-normal">{{
-                            team.hourly
-                          }}</span>
-                        </p>
-                        <p class="text-danger text-nowrap m-0 font-weight-bold">
-                          P&L
-                          <span class="font-weight-normal">{{
-                            team.profit
-                          }}</span>
-                        </p>
+                        <span class="leaderboard__number">{{ index + 1 }}</span>
                       </div>
-                      <small class="text-muted">{{ team.team_lead }}</small>
+                      <div
+                        class="position-absolute"
+                        style="left: 35px;margin-top: 18px"
+                      >
+                        <avatar :url="team.avatar" :size="60"></avatar>
+                      </div>
+                      <div style="padding-left:105px">
+                        <p
+                          class="m-0 text-nowrap font-weight-bold"
+                          style="overflow: hidden;text-overflow: ellipsis"
+                        >
+                          {{ team.team_name }}
+                        </p>
+                        <div style="line-height: 1">
+                          <p
+                            class="h5 text-success text-nowrap m-0 font-weight-bold"
+                          >
+                            H {{ team.hourly }}
+                          </p>
+                          <p class="text-danger text-nowrap mb-0 mt-1">
+                            P&L {{ team.profit }}
+                          </p>
+                        </div>
+                        <p class="mb-0 text-muted">{{ team.team_lead }}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="row no-gutters" style="margin: 0 -.5em">
-          <div v-for="(team, index) in belowTop3" class=" col-md-6 col-lg-4 col-xl-3 mt-3 px-2">
-            <div class="leaderboard__card">
-              <div class="row no-gutters align-items-center">
-                <div class="col-12">
-                  <div class="position-relative">
-                    <div
-                      class="position-absolute"
-                      style="left: 0px;margin-top: 21px"
-                    >
-                      <span class="leaderboard__number">{{ index + 4 }}</span>
-                    </div>
-                    <div
-                      class="position-absolute"
-                      style="left: 35px;margin-top: 6px"
-                    >
-                      <avatar :url="team.avatar" :size="60"></avatar>
-                    </div>
-                    <div style="padding-left:105px">
-                      <p
-                        class="m-0 small text-nowrap"
-                        style="overflow: hidden;text-overflow: ellipsis"
+          <div class="row no-gutters" style="margin: 0 -.5em">
+            <div
+              v-for="(team, index) in belowTop3"
+              class=" col-md-6 col-lg-4 col-xl-3 mt-3 px-2"
+            >
+              <div class="leaderboard__card border-default">
+                <div class="row no-gutters align-items-center">
+                  <div class="col-12">
+                    <div class="position-relative">
+                      <div
+                        class="position-absolute"
+                        style="left: 0px;margin-top: 32px"
                       >
-                        {{ team.team_name }}
-                      </p>
-                      <div style="line-height: 1">
-                        <p
-                          class="text-success text-nowrap m-0 font-weight-bold"
-                        >
-                          H
-                          <span class="font-weight-normal">{{
-                            team.hourly
-                          }}</span>
-                        </p>
-                        <p class="text-danger text-nowrap m-0 font-weight-bold">
-                          P&L
-                          <span class="font-weight-normal">{{
-                            team.profit
-                          }}</span>
-                        </p>
+                        <span class="leaderboard__number">{{ index + 4 }}</span>
                       </div>
-                      <small class="text-muted">{{ team.team_lead }}</small>
+                      <div
+                        class="position-absolute"
+                        style="left: 35px;margin-top: 18px"
+                      >
+                        <avatar :url="team.avatar" :size="60"></avatar>
+                      </div>
+                      <div style="padding-left:105px">
+                        <p
+                          class="m-0  text-nowrap font-weight-bold"
+                          style="overflow: hidden;text-overflow: ellipsis"
+                        >
+                          {{ team.team_name }}
+                        </p>
+                        <div style="line-height: 1">
+                          <p
+                            class="text-success h5 text-nowrap m-0 font-weight-bold"
+                          >
+                            H {{ team.hourly }}
+                          </p>
+                          <p class="text-danger text-nowrap mb-0  mt-1">
+                            P&L {{ team.profit }}
+                          </p>
+                        </div>
+                        <p class="mb-0 text-muted">{{ team.team_lead }}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -150,9 +168,14 @@
   </div>
 </template>
 <style scoped lang="scss">
+.leaderboard__wrapper {
+  min-height: 100vh;
+  min-width: 100%;
+}
 .leaderboard__ {
   max-width: 1400px;
   margin: 0 auto;
+  padding: 0 20px;
   position: relative;
   height: 100vh;
   .leaderboard__content {
@@ -470,7 +493,8 @@ export default {
           hourly_number: -1.62221
         }
       ]
-    }
+    },
+    icon: Object
   },
   data() {
     return {
@@ -486,7 +510,7 @@ export default {
     if (window.innerWidth > 1199) {
       if (contentHeight > windowHeight) {
         this.scaleNumber = this.scaleNumber - percent - 0.05;
-        this.offsetTop = (windowHeight - contentHeight * (0.95 - percent)) / 2;
+        this.offsetTop = (windowHeight - contentHeight * (0.92 - percent)) / 2;
       }
     }
   },
