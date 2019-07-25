@@ -2,67 +2,77 @@
   <div class="leaderboard__wrapper">
     <div class="leaderboard__" :style="scale">
       <div
-        class="row no-gutters py-3 align-items-center leaderboard__content"
+        class="row no-gutters py-4 align-items-center leaderboard__content"
         ref="leaderBoard"
       >
         <div class="col-12">
           <div
-            class="row no-gutters justify-content-center align-items-end d-none d-md-flex mb-3"
+            class="row no-gutters justify-content-center d-none d-md-flex mb-3"
           >
-            <div v-for="(team, index) in top3" class="col-auto px-4">
-              <div class="leaderboard__card_top text-center">
-                <span class="leaderboard__number mb-3">{{
-                  handleCountTop3(index)
-                }}</span>
-                <div v-if="handleCountTop3(index) === 1">
-                  <div class="position-relative">
-                    <img
-                      :src="icon.success"
-                      style="width: 250px;position: absolute;left: -42px;top: -55px;"
-                    />
-                    <avatar
-                      :url="team.avatar"
-                      :size="140"
-                      type="border-success"
-                      :bWidth="4"
-                    ></avatar>
+            <div class="col-lg-10 col-xl-8">
+              <div class="row no-gutters align-items-end">
+                <div v-for="(team, index) in top3" class="col px-4">
+                  <div class="leaderboard__card_top text-center">
+                    <span class="leaderboard__number mb-3">{{
+                      handleCountTop3(index)
+                    }}</span>
+                    <div v-if="handleCountTop3(index) === 1">
+                      <div
+                        class="position-relative mx-auto"
+                        style="width: 140px;height: 140px"
+                      >
+                        <img
+                          :src="icon.success"
+                          style="width: 250px;position: absolute;left: -55px;top: -55px;"
+                        />
+                        <avatar
+                          :url="team.avatar"
+                          :size="140"
+                          type="border-success"
+                          :bWidth="4"
+                        ></avatar>
+                      </div>
+                    </div>
+                    <div v-else>
+                      <div
+                        class="position-relative mx-auto"
+                        style="width: 100px;height: 100px"
+                      >
+                        <img
+                          :src="icon.warning"
+                          style="width: 182px;position: absolute;left: -41px;top: -41px;"
+                        />
+                        <avatar
+                          :url="team.avatar"
+                          :size="100"
+                          type="border-warning"
+                          :bWidth="4"
+                        ></avatar>
+                      </div>
+                    </div>
+                    <p
+                      class="mt-4 mb-0 font-weight-bold text-nowrap"
+                      style="overflow: hidden;text-overflow: ellipsis"
+                    >
+                      {{ team.team_name }}
+                    </p>
+                    <div style="line-height: 1;">
+                      <p
+                        class="text-success h5 text-nowrap m-0 font-weight-bold"
+                      >
+                        H: {{ team.hourly }}
+                      </p>
+                      <p class="text-danger text-nowrap mt-1 mb-0">
+                        P&L: {{ team.profit }}
+                      </p>
+                    </div>
+                    <p class="m-0 text-muted">TL: {{ team.team_lead }}</p>
                   </div>
                 </div>
-                <div v-else>
-                  <div class="position-relative">
-                    <img
-                      v-if="handleCountTop3(index) === 2"
-                      :src="icon.warning"
-                      style="width: 190px;position: absolute;left: 12px;top: -45px;"
-                    />
-                    <img
-                      v-else
-                      :src="icon.warning"
-                      style="width: 190px;position: absolute;left: -28px;top: -45px;"
-                    />
-                    <avatar
-                      :url="team.avatar"
-                      :size="100"
-                      type="border-warning"
-                      :bWidth="4"
-                    ></avatar>
-                  </div>
-                </div>
-                <p class="mt-4 mb-0 font-weight-bold">
-                  {{ team.team_name }}
-                </p>
-                <div style="line-height: 1;">
-                  <p class="text-success h5 text-nowrap m-0 font-weight-bold">
-                    H {{ team.hourly }}
-                  </p>
-                  <p class="text-danger text-nowrap mt-1 mb-0">
-                    P&L {{ team.profit }}
-                  </p>
-                </div>
-                <p class="m-0 text-muted">{{ team.team_lead }}</p>
               </div>
             </div>
           </div>
+
           <div class="row no-gutters d-flex d-md-none" style="margin: 0 -.5em">
             <div
               v-for="(team, index) in top3Normal"
@@ -102,13 +112,13 @@
                           <p
                             class="h5 text-success text-nowrap m-0 font-weight-bold"
                           >
-                            H {{ team.hourly }}
+                            H: {{ team.hourly }}
                           </p>
                           <p class="text-danger text-nowrap mb-0 mt-1">
-                            P&L {{ team.profit }}
+                            P&L: {{ team.profit }}
                           </p>
                         </div>
-                        <p class="mb-0 text-muted">{{ team.team_lead }}</p>
+                        <p class="mb-0 text-muted">TL: {{ team.team_lead }}</p>
                       </div>
                     </div>
                   </div>
@@ -116,6 +126,7 @@
               </div>
             </div>
           </div>
+
           <div class="row no-gutters" style="margin: 0 -.5em">
             <div
               v-for="(team, index) in belowTop3"
@@ -148,13 +159,13 @@
                           <p
                             class="text-success h5 text-nowrap m-0 font-weight-bold"
                           >
-                            H {{ team.hourly }}
+                            H: {{ team.hourly }}
                           </p>
                           <p class="text-danger text-nowrap mb-0  mt-1">
-                            P&L {{ team.profit }}
+                            P&L: {{ team.profit }}
                           </p>
                         </div>
-                        <p class="mb-0 text-muted">{{ team.team_lead }}</p>
+                        <p class="mb-0 text-muted">TL: {{ team.team_lead }}</p>
                       </div>
                     </div>
                   </div>
@@ -169,13 +180,10 @@
 </template>
 <style scoped lang="scss">
 .leaderboard__wrapper {
-  min-height: 100vh;
-  min-width: 100%;
-}
-.leaderboard__ {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 20px;
+}
+.leaderboard__ {
   position: relative;
   height: 100vh;
   .leaderboard__content {
@@ -498,19 +506,17 @@ export default {
   },
   data() {
     return {
-      scaleNumber: 1,
-      offsetTop: 0
+      scaleNumber: 1
     };
   },
   mounted: function() {
     let contentHeight = this.$refs.leaderBoard.offsetHeight;
     let windowHeight = window.innerHeight;
     let different = contentHeight - windowHeight;
-    let percent = different / windowHeight;
+    let percent = different / contentHeight;
     if (window.innerWidth > 1199) {
       if (contentHeight > windowHeight) {
-        this.scaleNumber = this.scaleNumber - percent - 0.05;
-        this.offsetTop = (windowHeight - contentHeight * (0.92 - percent)) / 2;
+        this.scaleNumber = 1 - percent;
       }
     }
   },
@@ -519,9 +525,7 @@ export default {
       return (
         "transform:scale(" +
         this.scaleNumber +
-        ");top:-" +
-        this.offsetTop +
-        "px"
+        ")translateX(-50%);transform-origin: 0 0;left: 50%;"
       );
     },
     top3: function() {
