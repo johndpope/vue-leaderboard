@@ -4,6 +4,20 @@
   (global = global || self, global.VueLeaderBoard = factory());
 }(this, function () { 'use strict';
 
+  function _typeof(obj) {
+    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+      _typeof = function (obj) {
+        return typeof obj;
+      };
+    } else {
+      _typeof = function (obj) {
+        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+      };
+    }
+
+    return _typeof(obj);
+  }
+
   //
   //
   //
@@ -239,307 +253,37 @@
       undefined
     );
 
-  //
   var script$1 = {
     components: {
       avatar: Avatar
     },
     props: {
-      data: {
-        type: Array,
-        "default": function _default() {
-          return [{
-            bu_id: 5,
-            bu_name: "Soulusi ZH Marketing BU",
-            team_id: 6,
-            team_name: "Soulusi ZH Marketing",
-            team_lead: "Colby",
-            avatar: "https:/upbox.ajt.my/template/img/team/2.png",
-            cost: "RM 4,263.24",
-            revenue: "RM 11,761.40",
-            hourly: "RM 21.30",
-            profit: "RM 7,498.16",
-            hourly_number: 21.3016
-          }, {
-            bu_id: 7,
-            bu_name: "Job Ad BU",
-            team_id: 11,
-            team_name: "No. 1 Team - Client Success",
-            team_lead: "Dandy",
-            avatar: "https:/upbox.ajt.my/template/img/team/1.png",
-            cost: "RM 4,571.93",
-            revenue: "RM 19,083.10",
-            hourly: "RM 20.61",
-            profit: "RM 14,511.20",
-            hourly_number: 20.6125
-          }, {
-            bu_id: 8,
-            bu_name: "Sonar BU",
-            team_id: 14,
-            team_name: "The Unstoppable",
-            team_lead: "Charmaine",
-            avatar: "https:/upbox.ajt.my/template/img/team/2.png",
-            cost: "RM 4,344.73",
-            revenue: "RM 14,394.00",
-            hourly: "RM 19.03",
-            profit: "RM 10,049.20",
-            hourly_number: 19.0327
-          }, {
-            bu_id: 7,
-            bu_name: "Job Ad BU",
-            team_id: 19,
-            team_name: "Chimera",
-            team_lead: "Bryan",
-            avatar: "https:/upbox.ajt.my/template/img/team/2.png",
-            cost: "RM 3,720.09",
-            revenue: "RM 20,130.70",
-            hourly: "RM 18.65",
-            profit: "RM 16,410.60",
-            hourly_number: 18.6484
-          }, {
-            bu_id: 6,
-            bu_name: "Soulusi Product BU",
-            team_id: 7,
-            team_name: "Soulusi Product Team",
-            team_lead: "Faiz",
-            avatar: "https:/upbox.ajt.my/template/img/team/2.png",
-            cost: "RM 4,198.45",
-            revenue: "RM 16,001.70",
-            hourly: "RM 16.77",
-            profit: "RM 11,803.20",
-            hourly_number: 16.7659
-          }, {
-            bu_id: 4,
-            bu_name: "Soulusi MY Marketing BU",
-            team_id: 5,
-            team_name: "Soulusi MY Marketing",
-            team_lead: "Aiman",
-            avatar: "https:/upbox.ajt.my/template/img/team/2.png",
-            cost: "RM 7,976.07",
-            revenue: "RM 19,038.80",
-            hourly: "RM 15.71",
-            profit: "RM 11,062.70",
-            hourly_number: 15.7141
-          }, {
-            bu_id: 10,
-            bu_name: "MK Marketing BU",
-            team_id: 17,
-            team_name: "MK Marketing Team",
-            team_lead: "Iqah",
-            avatar: "https:/upbox.ajt.my/template/img/team/10.png",
-            cost: "RM 3,002.34",
-            revenue: "RM 8,381.64",
-            hourly: "RM 15.28",
-            profit: "RM 5,379.31",
-            hourly_number: 15.2821
-          }, {
-            bu_id: 7,
-            bu_name: "Job Ad BU",
-            team_id: 10,
-            team_name: "The Rising Stars",
-            team_lead: "Fauziah",
-            avatar: "https:/upbox.ajt.my/template/img/team/7.png",
-            cost: "RM 6,855.85",
-            revenue: "RM 25,656.10",
-            hourly: "RM 15.26",
-            profit: "RM 18,800.30",
-            hourly_number: 15.26
-          }, {
-            bu_id: 17,
-            bu_name: "Creative BU",
-            team_id: 26,
-            team_name: "Creative Team",
-            team_lead: "Rifka",
-            avatar: "https:/upbox.ajt.my/template/img/team/1.png",
-            cost: "RM 2,785.36",
-            revenue: "RM 10,495.60",
-            hourly: "RM 14.60",
-            profit: "RM 7,710.23",
-            hourly_number: 14.6027
-          }, {
-            bu_id: 9,
-            bu_name: "RB Marketing BU",
-            team_id: 16,
-            team_name: "RB Marketing Team",
-            team_lead: "Chia",
-            avatar: "https:/upbox.ajt.my/template/img/team/3.png",
-            cost: "RM 4,640.37",
-            revenue: "RM 14,616.80",
-            hourly: "RM 14.17",
-            profit: "RM 9,976.44",
-            hourly_number: 14.1711
-          }, {
-            bu_id: 11,
-            bu_name: "AJT Marketing BU",
-            team_id: 18,
-            team_name: "AJT Marketing Team",
-            team_lead: "Sharul",
-            avatar: "https:/upbox.ajt.my/template/img/team/7.png",
-            cost: "RM 2,336.06",
-            revenue: "RM 9,370.00",
-            hourly: "RM 13.32",
-            profit: "RM 7,033.94",
-            hourly_number: 13.3219
-          }, {
-            bu_id: 15,
-            bu_name: "Operations BU",
-            team_id: 24,
-            team_name: "Operations Team",
-            team_lead: "Alena",
-            avatar: "https:/upbox.ajt.my/template/img/team/2.png",
-            cost: "RM 3,267.07",
-            revenue: "RM 11,965.00",
-            hourly: "RM 12.36",
-            profit: "RM 8,697.93",
-            hourly_number: 12.355
-          }, {
-            bu_id: 7,
-            bu_name: "Job Ad BU",
-            team_id: 9,
-            team_name: "Fire Starter",
-            team_lead: "Ashraf",
-            avatar: "https:/upbox.ajt.my/template/img/team/11.png",
-            cost: "RM 3,157.39",
-            revenue: "RM 9,640.99",
-            hourly: "RM 9.21",
-            profit: "RM 6,483.59",
-            hourly_number: 9.20965
-          }, {
-            bu_id: 16,
-            bu_name: "Video MY BU",
-            team_id: 25,
-            team_name: "Video MY Team",
-            team_lead: "Hakimi",
-            avatar: "https:/upbox.ajt.my/template/img/team/8.png",
-            cost: "RM 7,589.11",
-            revenue: "RM 15,349.20",
-            hourly: "RM 7.35",
-            profit: "RM 7,760.09",
-            hourly_number: 7.34857
-          }, {
-            bu_id: 7,
-            bu_name: "Job Ad BU",
-            team_id: 20,
-            team_name: "Capitalism Crew",
-            team_lead: "Alex",
-            avatar: "https:/upbox.ajt.my/template/img/team/4.png",
-            cost: "RM 3,420.07",
-            revenue: "RM 7,825.20",
-            hourly: "RM 6.26",
-            profit: "RM 4,405.13",
-            hourly_number: 6.25729
-          }, {
-            bu_id: 13,
-            bu_name: "MK/RB Product BU",
-            team_id: 22,
-            team_name: "MK/RB Product Team",
-            team_lead: "Afin",
-            avatar: "https:/upbox.ajt.my/template/img/team/2.png",
-            cost: "RM 34,823.80",
-            revenue: "RM 49,945.80",
-            hourly: "RM 6.14",
-            profit: "RM 15,122.00",
-            hourly_number: 6.13716
-          }, {
-            bu_id: 19,
-            bu_name: "HR ID BU",
-            team_id: 28,
-            team_name: "HR ID Team",
-            team_lead: "Sarah Dewi",
-            avatar: "https:/upbox.ajt.my/template/img/team/2.png",
-            cost: "RM 1,875.15",
-            revenue: "RM 4,000.00",
-            hourly: "RM 6.04",
-            profit: "RM 2,124.85",
-            hourly_number: 6.03651
-          }, {
-            bu_id: 20,
-            bu_name: "MK ID BU",
-            team_id: 29,
-            team_name: "MK ID Team",
-            team_lead: "Nanda",
-            avatar: "https:/upbox.ajt.my/template/img/team/2.png",
-            cost: "RM 4,547.40",
-            revenue: "RM 9,599.66",
-            hourly: "RM 5.74",
-            profit: "RM 5,052.26",
-            hourly_number: 5.7412
-          }, {
-            bu_id: 12,
-            bu_name: "SEO/SEM Marketing BU",
-            team_id: 21,
-            team_name: "SEO/SEM Marketing Team",
-            team_lead: "Willis",
-            avatar: "https:/upbox.ajt.my/template/img/team/6.png",
-            cost: "RM 11,192.10",
-            revenue: "RM 14,159.30",
-            hourly: "RM 4.21",
-            profit: "RM 2,967.22",
-            hourly_number: 4.2148
-          }, {
-            bu_id: 14,
-            bu_name: "AJT Product BU",
-            team_id: 23,
-            team_name: "AJT Product Team",
-            team_lead: "Bernie",
-            avatar: "https:/upbox.ajt.my/template/img/team/2.png",
-            cost: "RM 12,645.10",
-            revenue: "RM 12,987.40",
-            hourly: "RM 0.28",
-            profit: "RM 342.33",
-            hourly_number: 0.277865
-          }, {
-            bu_id: 8,
-            bu_name: "Sonar BU",
-            team_id: 15,
-            team_name: "Thanos & Family",
-            team_lead: "Louis",
-            avatar: "https:/upbox.ajt.my/template/img/team/8.png",
-            cost: "RM 7,867.94",
-            revenue: "RM 7,873.85",
-            hourly: "RM 0.01",
-            profit: "RM 5.91",
-            hourly_number: 0.0112009
-          }, {
-            bu_id: 18,
-            bu_name: "HR MY BU",
-            team_id: 27,
-            team_name: "HR MY Team",
-            team_lead: "Li Peng",
-            avatar: "https:/upbox.ajt.my/template/img/team/2.png",
-            cost: "RM 3,142.03",
-            revenue: "RM 2,000.00",
-            hourly: "RM -1.62",
-            profit: "RM -1,142.03",
-            hourly_number: -1.62221
-          }];
-        }
+      name: String,
+      sortby: {
+        type: String,
+        "default": ""
       },
       icon: Object
     },
     data: function data() {
       return {
-        scaleNumber: 1
+        scaleNumber: 1,
+        sorting: this.sortby,
+        buData: []
       };
     },
     mounted: function mounted() {
-      var contentHeight = this.$refs.leaderBoard.offsetHeight;
-      var windowHeight = window.innerHeight;
-      var different = contentHeight - windowHeight;
-      var percent = different / contentHeight;
-
-      if (window.innerWidth > 1199) {
-        if (contentHeight > windowHeight) {
-          this.scaleNumber = 1 - percent;
-        }
-      }
+      this.handleGetData();
     },
     computed: {
-      scale: function scale() {
-        return "transform:scale(" + this.scaleNumber + ")translateX(-50%);transform-origin: 0 0;left: 50%;";
+      sort: function sort() {
+        return this.sorting;
+      },
+      board: function board() {
+        return this.buData;
       },
       top3: function top3() {
-        var top3 = this.data.splice(0, 3);
+        var top3 = this.board.splice(0, 3);
         var top_1 = top3[0];
         var top_2 = top3[1];
         var top_3 = top3[2];
@@ -553,10 +297,52 @@
         return [top_1, top_2, top_3];
       },
       belowTop3: function belowTop3() {
-        return this.data;
+        return this.board;
+      },
+      scale: function scale() {
+        return "transform:scale(" + this.scaleNumber + ")translateX(-50%);transform-origin: 0 0;left: 50%;";
       }
     },
     methods: {
+      reload: function reload() {
+        this.handleGetData();
+      },
+      handleGetData: function handleGetData() {
+        var _this = this;
+
+        this.buData = [];
+        $.ajax({
+          url: "https://upbox.ajt.my/api/bulist?sortby=" + this.sorting,
+          type: "GET",
+          dataType: "json",
+          success: function success(data) {
+            if (data.status == "success") {
+              _this.buData = data.data;
+            }
+          }
+        });
+      },
+      handleChangeSort: function handleChangeSort(event) {
+        this.$emit("sortby", event.target.value);
+        this.sorting = event.target.value;
+        this.handleGetData();
+      },
+      handleScale: function handleScale() {
+        var _this2 = this;
+
+        this.$nextTick(function () {
+          if (window.innerWidth > 1199) {
+            var contentHeight = _this2.$refs[_this2.name].offsetHeight;
+            var windowHeight = window.innerHeight;
+            var different = contentHeight - windowHeight;
+            var percent = different / contentHeight;
+
+            if (contentHeight > windowHeight) {
+              _this2.scaleNumber = 1 - percent;
+            }
+          }
+        });
+      },
       handleCountTop3: function handleCountTop3(index) {
         switch (index) {
           case 0:
@@ -572,6 +358,27 @@
             break;
         }
       }
+    },
+    directives: {
+      forCallback: function forCallback(el, binding) {
+        var element = binding.value;
+        var key = element.key;
+        var len = 0;
+
+        if (Array.isArray(element.array)) {
+          len = element.array.length;
+        } else if (_typeof(element.array) === "object") {
+          var keys = Object.keys(element.array);
+          key = keys.indexOf(key);
+          len = keys.length;
+        }
+
+        if (key == len - 1) {
+          if (typeof element.callback === "function") {
+            element.callback();
+          }
+        }
+      }
     }
   };
 
@@ -579,20 +386,24 @@
   const __vue_script__$1 = script$1;
 
   /* template */
-  var __vue_render__$1 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"leaderboard__wrapper"},[_c('div',{staticClass:"leaderboard__",style:(_vm.scale)},[_c('div',{ref:"leaderBoard",staticClass:"row no-gutters py-4 align-items-center leaderboard__content"},[_c('div',{staticClass:"col-12"},[_c('div',{staticClass:"row no-gutters justify-content-center d-none d-md-flex mb-3"},[_c('div',{staticClass:"col-lg-10 col-xl-8"},[_c('div',{staticClass:"row no-gutters align-items-end"},_vm._l((_vm.top3),function(team,index){return _c('div',{staticClass:"col px-4"},[_c('div',{staticClass:"leaderboard__card_top text-center"},[_c('span',{staticClass:"leaderboard__number mb-3"},[_vm._v(_vm._s(_vm.handleCountTop3(index)))]),_vm._v(" "),(_vm.handleCountTop3(index) === 1)?_c('div',[_c('div',{staticClass:"position-relative mx-auto",staticStyle:{"width":"140px","height":"140px"}},[_c('img',{staticStyle:{"width":"250px","position":"absolute","left":"-55px","top":"-55px"},attrs:{"src":_vm.icon.success}}),_vm._v(" "),_c('avatar',{attrs:{"url":team.avatar,"size":140,"type":"border-success","bWidth":4}})],1)]):_c('div',[_c('div',{staticClass:"position-relative mx-auto",staticStyle:{"width":"100px","height":"100px"}},[_c('img',{staticStyle:{"width":"182px","position":"absolute","left":"-41px","top":"-41px"},attrs:{"src":_vm.icon.warning}}),_vm._v(" "),_c('avatar',{attrs:{"url":team.avatar,"size":100,"type":"border-warning","bWidth":4}})],1)]),_vm._v(" "),_c('p',{staticClass:"mt-4 mb-0 font-weight-bold text-nowrap",staticStyle:{"overflow":"hidden","text-overflow":"ellipsis"}},[_vm._v("\n                    "+_vm._s(team.team_name)+"\n                  ")]),_vm._v(" "),_c('div',{staticStyle:{"line-height":"1"}},[_c('p',{staticClass:"text-success h5 text-nowrap m-0 font-weight-bold"},[_vm._v("\n                      H: "+_vm._s(team.hourly)+"\n                    ")]),_vm._v(" "),_c('p',{staticClass:"text-danger text-nowrap mt-1 mb-0"},[_vm._v("\n                      P&L: "+_vm._s(team.profit)+"\n                    ")])]),_vm._v(" "),_c('p',{staticClass:"m-0 text-muted"},[_vm._v("TL: "+_vm._s(team.team_lead))])])])}),0)])]),_vm._v(" "),_c('div',{staticClass:"row no-gutters d-flex d-md-none",staticStyle:{"margin":"0 -.5em"}},_vm._l((_vm.top3Normal),function(team,index){return _c('div',{staticClass:" col-md-6 col-lg-4 col-xl-3 mt-md-3 px-2",class:{ 'mt-3': index != 0 }},[_c('div',{staticClass:"leaderboard__card",class:{
-                  'border-success': index === 0,
-                  'border-warning': index !== 0
-                }},[_c('div',{staticClass:"row no-gutters align-items-center"},[_c('div',{staticClass:"col-12"},[_c('div',{staticClass:"position-relative"},[_c('div',{staticClass:"position-absolute",staticStyle:{"left":"0px","margin-top":"32px"}},[_c('span',{staticClass:"leaderboard__number"},[_vm._v(_vm._s(index + 1))])]),_vm._v(" "),_c('div',{staticClass:"position-absolute",staticStyle:{"left":"35px","margin-top":"18px"}},[_c('avatar',{attrs:{"url":team.avatar,"size":60}})],1),_vm._v(" "),_c('div',{staticStyle:{"padding-left":"105px"}},[_c('p',{staticClass:"m-0 text-nowrap font-weight-bold",staticStyle:{"overflow":"hidden","text-overflow":"ellipsis"}},[_vm._v("\n                        "+_vm._s(team.team_name)+"\n                      ")]),_vm._v(" "),_c('div',{staticStyle:{"line-height":"1"}},[_c('p',{staticClass:"h5 text-success text-nowrap m-0 font-weight-bold"},[_vm._v("\n                          H: "+_vm._s(team.hourly)+"\n                        ")]),_vm._v(" "),_c('p',{staticClass:"text-danger text-nowrap mb-0 mt-1"},[_vm._v("\n                          P&L: "+_vm._s(team.profit)+"\n                        ")])]),_vm._v(" "),_c('p',{staticClass:"mb-0 text-muted"},[_vm._v("TL: "+_vm._s(team.team_lead))])])])])])])])}),0),_vm._v(" "),_c('div',{staticClass:"row no-gutters",staticStyle:{"margin":"0 -.5em"}},_vm._l((_vm.belowTop3),function(team,index){return _c('div',{staticClass:" col-md-6 col-lg-4 col-xl-3 mt-3 px-2"},[_c('div',{staticClass:"leaderboard__card border-default"},[_c('div',{staticClass:"row no-gutters align-items-center"},[_c('div',{staticClass:"col-12"},[_c('div',{staticClass:"position-relative"},[_c('div',{staticClass:"position-absolute",staticStyle:{"left":"0px","margin-top":"32px"}},[_c('span',{staticClass:"leaderboard__number"},[_vm._v(_vm._s(index + 4))])]),_vm._v(" "),_c('div',{staticClass:"position-absolute",staticStyle:{"left":"35px","margin-top":"18px"}},[_c('avatar',{attrs:{"url":team.avatar,"size":60}})],1),_vm._v(" "),_c('div',{staticStyle:{"padding-left":"105px"}},[_c('p',{staticClass:"m-0  text-nowrap font-weight-bold",staticStyle:{"overflow":"hidden","text-overflow":"ellipsis"}},[_vm._v("\n                        "+_vm._s(team.team_name)+"\n                      ")]),_vm._v(" "),_c('div',{staticStyle:{"line-height":"1"}},[_c('p',{staticClass:"text-success h5 text-nowrap m-0 font-weight-bold"},[_vm._v("\n                          H: "+_vm._s(team.hourly)+"\n                        ")]),_vm._v(" "),_c('p',{staticClass:"text-danger text-nowrap mb-0  mt-1"},[_vm._v("\n                          P&L: "+_vm._s(team.profit)+"\n                        ")])]),_vm._v(" "),_c('p',{staticClass:"mb-0 text-muted"},[_vm._v("TL: "+_vm._s(team.team_lead))])])])])])])])}),0)])])])])};
+  var __vue_render__$1 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"leaderboard__wrapper"},[(_vm.board.length >= 4)?_c('div',{staticClass:"leaderboard__",style:(_vm.scale)},[_c('div',{ref:_vm.name,staticClass:"row no-gutters py-4 align-items-center leaderboard__content"},[_c('div',{staticClass:"col-12"},[_c('h2',{staticClass:"pt-3 text-center font-weight-bold position-fixed d-none d-md-block",staticStyle:{"top":"0","left":"0"}},[_vm._t("default")],2),_vm._v(" "),_c('div',{staticClass:"row no-gutters justify-content-center d-none d-md-flex mb-4"},[_c('div',{staticClass:"col-lg-10 col-xl-8"},[_c('div',{staticClass:"row no-gutters align-items-end"},_vm._l((_vm.top3),function(team,index){return _c('div',{staticClass:"col px-4"},[_c('a',{attrs:{"href":'https://upbox.ajt.my/businessunits/report/' + team.bu_id,"target":"_blank"}},[_c('div',{staticClass:"leaderboard__card_top text-center"},[_c('span',{staticClass:"leaderboard__number mb-4"},[_vm._v(_vm._s(_vm.handleCountTop3(index)))]),_vm._v(" "),(_vm.handleCountTop3(index) === 1)?_c('div',[_c('div',{staticClass:"position-relative mx-auto",staticStyle:{"width":"140px","height":"140px"}},[_c('img',{staticStyle:{"width":"250px","position":"absolute","left":"-55px","top":"-55px"},attrs:{"src":_vm.icon.success}}),_vm._v(" "),_c('avatar',{attrs:{"url":team.avatar,"size":140,"type":"border-success","bWidth":4}})],1)]):_c('div',[_c('div',{staticClass:"position-relative mx-auto",staticStyle:{"width":"100px","height":"100px"}},[_c('img',{staticStyle:{"width":"182px","position":"absolute","left":"-41px","top":"-41px"},attrs:{"src":_vm.icon.warning}}),_vm._v(" "),_c('avatar',{attrs:{"url":team.avatar,"size":100,"type":"border-warning","bWidth":4}})],1)]),_vm._v(" "),_c('p',{staticClass:"mt-4 mb-0 font-weight-bold text-nowrap",staticStyle:{"overflow":"hidden","text-overflow":"ellipsis"}},[_vm._v("\n                      "+_vm._s(team.bu_name)+"\n                    ")]),_vm._v(" "),_c('div',{staticStyle:{"line-height":"1"}},[(_vm.sort === 'hourly')?_c('p',{staticClass:"text-success text-nowrap m-0 font-weight-bold"},[_vm._v("\n                        "+_vm._s(team.hourly)+"\n                      ")]):(_vm.sort === 'profit')?_c('p',{staticClass:"text-success text-nowrap m-0 font-weight-bold"},[_vm._v("\n                        "+_vm._s(team.profit)+"\n                      ")]):_vm._e()]),_vm._v(" "),_c('p',{staticClass:"m-0 text-muted"},[_vm._v("TL: "+_vm._s(team.team_lead))])])])])}),0)])]),_vm._v(" "),_c('div',{staticClass:"row no-gutters d-flex d-md-none",staticStyle:{"margin":"0 -.5em"}},_vm._l((_vm.top3Normal),function(team,index){return _c('div',{staticClass:" col-md-6 col-lg-3 col-xl-2 mt-4 px-2",class:{ 'mt-4': index != 0 }},[_c('a',{attrs:{"href":'https://upbox.ajt.my/businessunits/report/' + team.bu_id,"target":"_blank"}},[_c('div',{staticClass:"leaderboard__card",class:{
+                    'border-success': index === 0,
+                    'border-warning': index !== 0
+                  }},[_c('div',{staticClass:"row no-gutters align-items-center"},[_c('div',{staticClass:"col-12"},[_c('div',{staticClass:"position-relative"},[_c('div',{staticClass:"position-absolute",staticStyle:{"left":"-1px","top":"-28px"}},[_c('span',{staticClass:"leaderboard__number"},[_vm._v(_vm._s(index + 1))])]),_vm._v(" "),_c('div',{staticClass:"position-absolute",staticStyle:{"left":"10px","top":"50%","transform":"translateY(-50%)"}},[_c('avatar',{attrs:{"url":team.avatar,"size":65}})],1),_vm._v(" "),_c('div',{staticStyle:{"padding-left":"85px","padding-right":"10px"}},[_c('p',{staticClass:"m-0 text-nowrap font-weight-bold",staticStyle:{"overflow":"hidden","text-overflow":"ellipsis"}},[_vm._v("\n                          "+_vm._s(team.bu_name)+"\n                        ")]),_vm._v(" "),_c('div',{staticStyle:{"line-height":"1"}},[(_vm.sort === 'hourly')?_c('p',{staticClass:"text-success text-nowrap m-0 font-weight-bold",staticStyle:{"overflow":"hidden","text-overflow":"ellipsis"}},[_vm._v("\n                            "+_vm._s(team.hourly)+"\n                          ")]):(_vm.sort === 'profit')?_c('p',{staticClass:"text-success text-nowrap m-0 font-weight-bold",staticStyle:{"overflow":"hidden","text-overflow":"ellipsis"}},[_vm._v("\n                            "+_vm._s(team.profit)+"\n                          ")]):_vm._e()]),_vm._v(" "),_c('p',{staticClass:"mb-0 text-muted text-nowrap",staticStyle:{"overflow":"hidden","text-overflow":"ellipsis"}},[_vm._v("\n                          TL: "+_vm._s(team.team_lead)+"\n                        ")])])])])])])])])}),0),_vm._v(" "),_c('div',{staticClass:"row no-gutters",staticStyle:{"margin":"0 -.5em"}},_vm._l((_vm.belowTop3),function(team,index){return _c('div',{directives:[{name:"for-callback",rawName:"v-for-callback",value:({
+                key: index,
+                array: _vm.belowTop3,
+                callback: _vm.handleScale
+              }),expression:"{\n              key: index,\n              array: belowTop3,\n              callback: handleScale\n            }"}],staticClass:" col-md-6 col-lg-3 col-xl-2 mt-4 px-2"},[_c('a',{attrs:{"href":'https://upbox.ajt.my/businessunits/report/' + team.bu_id,"target":"_blank"}},[_c('div',{staticClass:"leaderboard__card border-default text-left"},[_c('div',{staticClass:"row no-gutters align-items-center"},[_c('div',{staticClass:"col-12"},[_c('div',{staticClass:"position-relative"},[_c('div',{staticClass:"position-absolute",staticStyle:{"left":"-1px","top":"-28px"}},[_c('span',{staticClass:"leaderboard__number"},[_vm._v(_vm._s(index + 4))])]),_vm._v(" "),_c('div',{staticClass:"position-absolute",staticStyle:{"left":"10px","top":"50%","transform":"translateY(-50%)"}},[_c('avatar',{attrs:{"url":team.avatar,"size":65}})],1),_vm._v(" "),_c('div',{staticStyle:{"padding-left":"85px","padding-right":"10px"}},[_c('p',{staticClass:"m-0  text-nowrap font-weight-bold",staticStyle:{"overflow":"hidden","text-overflow":"ellipsis"}},[_vm._v("\n                          "+_vm._s(team.bu_name)+"\n                        ")]),_vm._v(" "),_c('div',{staticStyle:{"line-height":"1"}},[(_vm.sort === 'hourly')?_c('p',{staticClass:"text-success text-nowrap m-0 font-weight-bold",staticStyle:{"overflow":"hidden","text-overflow":"ellipsis"}},[_vm._v("\n                            "+_vm._s(team.hourly)+"\n                          ")]):(_vm.sort === 'profit')?_c('p',{staticClass:"text-success text-nowrap m-0 font-weight-bold",staticStyle:{"overflow":"hidden","text-overflow":"ellipsis"}},[_vm._v("\n                            "+_vm._s(team.profit)+"\n                          ")]):_vm._e()]),_vm._v(" "),_c('p',{staticClass:"mb-0 text-muted text-nowrap",staticStyle:{"overflow":"hidden","text-overflow":"ellipsis"}},[_vm._v("\n                          TL: "+_vm._s(team.team_lead)+"\n                        ")])])])])])])])])}),0)])])]):_vm._e()])};
   var __vue_staticRenderFns__$1 = [];
 
     /* style */
     const __vue_inject_styles__$1 = function (inject) {
       if (!inject) return
-      inject("data-v-6cf51a86_0", { source: ".leaderboard__wrapper[data-v-6cf51a86]{max-width:1400px;margin:0 auto}.leaderboard__[data-v-6cf51a86]{position:relative;height:100vh}.leaderboard__ .leaderboard__content[data-v-6cf51a86]{min-height:100%}.leaderboard__ .leaderboard__card_top .leaderboard__number[data-v-6cf51a86]{display:block;font-size:20px}.leaderboard__ .leaderboard__card[data-v-6cf51a86]{padding:10px 20px;border:1px solid rgba(0,0,0,.1)}.leaderboard__ .leaderboard__card .leaderboard__number[data-v-6cf51a86]{font-size:20px}", map: undefined, media: undefined });
+      inject("data-v-7cfb03fa_0", { source: ".leaderboard__wrapper[data-v-7cfb03fa]{padding:0 20px;margin:0 auto}.leaderboard__[data-v-7cfb03fa]{position:relative;height:100vh}.leaderboard__ a[data-v-7cfb03fa]{text-decoration:none;color:inherit}.leaderboard__ .leaderboard__content[data-v-7cfb03fa]{min-height:100%}.leaderboard__ .leaderboard__card_top .leaderboard__number[data-v-7cfb03fa]{font-size:18px;border:1px solid rgba(0,0,0,.1);width:30px;display:inline-block;text-align:center;line-height:1.5;background:#ff0}.leaderboard__ .leaderboard__card[data-v-7cfb03fa]{padding:10px 0;border:1px solid rgba(0,0,0,.1)}.leaderboard__ .leaderboard__card .leaderboard__number[data-v-7cfb03fa]{font-size:18px;border:1px solid rgba(0,0,0,.1);width:30px;display:block;text-align:center;line-height:1.5;background:#ff0}", map: undefined, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$1 = "data-v-6cf51a86";
+    const __vue_scope_id__$1 = "data-v-7cfb03fa";
     /* module identifier */
     const __vue_module_identifier__$1 = undefined;
     /* functional template */

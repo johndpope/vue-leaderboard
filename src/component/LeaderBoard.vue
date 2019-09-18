@@ -1,176 +1,237 @@
 <template>
   <div class="leaderboard__wrapper">
-    <div class="leaderboard__" :style="scale">
+    <div v-if="board.length >= 4" class="leaderboard__" :style="scale">
       <div
         class="row no-gutters py-4 align-items-center leaderboard__content"
-        ref="leaderBoard"
+        :ref="name"
       >
         <div class="col-12">
+          <h2
+            style="top: 0;left: 0"
+            class="pt-3 text-center font-weight-bold position-fixed d-none d-md-block"
+          >
+            <slot></slot>
+          </h2>
           <div
-            class="row no-gutters justify-content-center d-none d-md-flex mb-3"
+            class="row no-gutters justify-content-center d-none d-md-flex mb-4"
           >
             <div class="col-lg-10 col-xl-8">
               <div class="row no-gutters align-items-end">
                 <div v-for="(team, index) in top3" class="col px-4">
-                  <div class="leaderboard__card_top text-center">
-                    <span class="leaderboard__number mb-3">{{
-                      handleCountTop3(index)
-                    }}</span>
-                    <div v-if="handleCountTop3(index) === 1">
-                      <div
-                        class="position-relative mx-auto"
-                        style="width: 140px;height: 140px"
-                      >
-                        <img
-                          :src="icon.success"
-                          style="width: 250px;position: absolute;left: -55px;top: -55px;"
-                        />
-                        <avatar
-                          :url="team.avatar"
-                          :size="140"
-                          type="border-success"
-                          :bWidth="4"
-                        ></avatar>
+                  <a
+                    :href="
+                      'https://upbox.ajt.my/businessunits/report/' + team.bu_id
+                    "
+                    target="_blank"
+                  >
+                    <div class="leaderboard__card_top text-center">
+                      <span class="leaderboard__number mb-4">{{
+                        handleCountTop3(index)
+                      }}</span>
+                      <div v-if="handleCountTop3(index) === 1">
+                        <div
+                          class="position-relative mx-auto"
+                          style="width: 140px;height: 140px"
+                        >
+                          <img
+                            :src="icon.success"
+                            style="width: 250px;position: absolute;left: -55px;top: -55px;"
+                          />
+                          <avatar
+                            :url="team.avatar"
+                            :size="140"
+                            type="border-success"
+                            :bWidth="4"
+                          ></avatar>
+                        </div>
                       </div>
-                    </div>
-                    <div v-else>
-                      <div
-                        class="position-relative mx-auto"
-                        style="width: 100px;height: 100px"
-                      >
-                        <img
-                          :src="icon.warning"
-                          style="width: 182px;position: absolute;left: -41px;top: -41px;"
-                        />
-                        <avatar
-                          :url="team.avatar"
-                          :size="100"
-                          type="border-warning"
-                          :bWidth="4"
-                        ></avatar>
+                      <div v-else>
+                        <div
+                          class="position-relative mx-auto"
+                          style="width: 100px;height: 100px"
+                        >
+                          <img
+                            :src="icon.warning"
+                            style="width: 182px;position: absolute;left: -41px;top: -41px;"
+                          />
+                          <avatar
+                            :url="team.avatar"
+                            :size="100"
+                            type="border-warning"
+                            :bWidth="4"
+                          ></avatar>
+                        </div>
                       </div>
-                    </div>
-                    <p
-                      class="mt-4 mb-0 font-weight-bold text-nowrap"
-                      style="overflow: hidden;text-overflow: ellipsis"
-                    >
-                      {{ team.team_name }}
-                    </p>
-                    <div style="line-height: 1;">
                       <p
-                        class="text-success h5 text-nowrap m-0 font-weight-bold"
+                        class="mt-4 mb-0 font-weight-bold text-nowrap"
+                        style="overflow: hidden;text-overflow: ellipsis"
                       >
-                        H: {{ team.hourly }}
+                        {{ team.bu_name }}
                       </p>
-                      <p class="text-danger text-nowrap mt-1 mb-0">
-                        P&L: {{ team.profit }}
-                      </p>
+                      <div style="line-height: 1;">
+                        <p
+                          v-if="sort === 'hourly'"
+                          class="text-success text-nowrap m-0 font-weight-bold"
+                        >
+                          {{ team.hourly }}
+                        </p>
+                        <p
+                          v-else-if="sort === 'profit'"
+                          class="text-success text-nowrap m-0 font-weight-bold"
+                        >
+                          {{ team.profit }}
+                        </p>
+                      </div>
+                      <p class="m-0 text-muted">TL: {{ team.team_lead }}</p>
                     </div>
-                    <p class="m-0 text-muted">TL: {{ team.team_lead }}</p>
-                  </div>
+                  </a>
                 </div>
               </div>
             </div>
           </div>
-
           <div class="row no-gutters d-flex d-md-none" style="margin: 0 -.5em">
             <div
               v-for="(team, index) in top3Normal"
-              class=" col-md-6 col-lg-4 col-xl-3 mt-md-3 px-2"
-              :class="{ 'mt-3': index != 0 }"
+              class=" col-md-6 col-lg-3 col-xl-2 mt-4 px-2"
+              :class="{ 'mt-4': index != 0 }"
             >
-              <div
-                class="leaderboard__card"
-                :class="{
-                  'border-success': index === 0,
-                  'border-warning': index !== 0
-                }"
+              <a
+                :href="
+                  'https://upbox.ajt.my/businessunits/report/' + team.bu_id
+                "
+                target="_blank"
               >
-                <div class="row no-gutters align-items-center">
-                  <div class="col-12">
-                    <div class="position-relative">
-                      <div
-                        class="position-absolute"
-                        style="left: 0px;margin-top: 32px"
-                      >
-                        <span class="leaderboard__number">{{ index + 1 }}</span>
-                      </div>
-                      <div
-                        class="position-absolute"
-                        style="left: 35px;margin-top: 18px"
-                      >
-                        <avatar :url="team.avatar" :size="60"></avatar>
-                      </div>
-                      <div style="padding-left:105px">
-                        <p
-                          class="m-0 text-nowrap font-weight-bold"
-                          style="overflow: hidden;text-overflow: ellipsis"
+                <div
+                  class="leaderboard__card"
+                  :class="{
+                    'border-success': index === 0,
+                    'border-warning': index !== 0
+                  }"
+                >
+                  <div class="row no-gutters align-items-center">
+                    <div class="col-12">
+                      <div class="position-relative">
+                        <div
+                          class="position-absolute"
+                          style="left: -1px;top: -28px"
                         >
-                          {{ team.team_name }}
-                        </p>
-                        <div style="line-height: 1">
+                          <span class="leaderboard__number">{{
+                            index + 1
+                          }}</span>
+                        </div>
+
+                        <div
+                          class="position-absolute"
+                          style="left: 10px;top: 50%;transform: translateY(-50%);"
+                        >
+                          <avatar :url="team.avatar" :size="65"></avatar>
+                        </div>
+                        <div style="padding-left:85px;padding-right: 10px">
                           <p
-                            class="h5 text-success text-nowrap m-0 font-weight-bold"
+                            class="m-0 text-nowrap font-weight-bold"
+                            style="overflow: hidden;text-overflow: ellipsis"
                           >
-                            H: {{ team.hourly }}
+                            {{ team.bu_name }}
                           </p>
-                          <p class="text-danger text-nowrap mb-0 mt-1">
-                            P&L: {{ team.profit }}
+                          <div style="line-height: 1">
+                            <p
+                              v-if="sort === 'hourly'"
+                              class="text-success text-nowrap m-0 font-weight-bold"
+                              style="overflow: hidden;text-overflow: ellipsis"
+                            >
+                              {{ team.hourly }}
+                            </p>
+                            <p
+                              v-else-if="sort === 'profit'"
+                              class="text-success text-nowrap m-0 font-weight-bold"
+                              style="overflow: hidden;text-overflow: ellipsis"
+                            >
+                              {{ team.profit }}
+                            </p>
+                          </div>
+                          <p
+                            class="mb-0 text-muted text-nowrap"
+                            style="overflow: hidden;text-overflow: ellipsis"
+                          >
+                            TL: {{ team.team_lead }}
                           </p>
                         </div>
-                        <p class="mb-0 text-muted">TL: {{ team.team_lead }}</p>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
-
           <div class="row no-gutters" style="margin: 0 -.5em">
             <div
               v-for="(team, index) in belowTop3"
-              class=" col-md-6 col-lg-4 col-xl-3 mt-3 px-2"
+              v-for-callback="{
+                key: index,
+                array: belowTop3,
+                callback: handleScale
+              }"
+              class=" col-md-6 col-lg-3 col-xl-2 mt-4 px-2"
             >
-              <div class="leaderboard__card border-default">
-                <div class="row no-gutters align-items-center">
-                  <div class="col-12">
-                    <div class="position-relative">
-                      <div
-                        class="position-absolute"
-                        style="left: 0px;margin-top: 32px"
-                      >
-                        <span class="leaderboard__number">{{ index + 4 }}</span>
-                      </div>
-                      <div
-                        class="position-absolute"
-                        style="left: 35px;margin-top: 18px"
-                      >
-                        <avatar :url="team.avatar" :size="60"></avatar>
-                      </div>
-                      <div style="padding-left:105px">
-                        <p
-                          class="m-0  text-nowrap font-weight-bold"
-                          style="overflow: hidden;text-overflow: ellipsis"
+              <a
+                :href="
+                  'https://upbox.ajt.my/businessunits/report/' + team.bu_id
+                "
+                target="_blank"
+              >
+                <div class="leaderboard__card border-default text-left">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col-12">
+                      <div class="position-relative">
+                        <div
+                          class="position-absolute"
+                          style="left: -1px;top: -28px"
                         >
-                          {{ team.team_name }}
-                        </p>
-                        <div style="line-height: 1">
+                          <span class="leaderboard__number">{{
+                            index + 4
+                          }}</span>
+                        </div>
+                        <div
+                          class="position-absolute"
+                          style="left: 10px;top: 50%;transform: translateY(-50%);"
+                        >
+                          <avatar :url="team.avatar" :size="65"></avatar>
+                        </div>
+                        <div style="padding-left:85px;padding-right: 10px">
                           <p
-                            class="text-success h5 text-nowrap m-0 font-weight-bold"
+                            class="m-0  text-nowrap font-weight-bold"
+                            style="overflow: hidden;text-overflow: ellipsis"
                           >
-                            H: {{ team.hourly }}
+                            {{ team.bu_name }}
                           </p>
-                          <p class="text-danger text-nowrap mb-0  mt-1">
-                            P&L: {{ team.profit }}
+                          <div style="line-height: 1">
+                            <p
+                              v-if="sort === 'hourly'"
+                              class="text-success text-nowrap m-0 font-weight-bold"
+                              style="overflow: hidden;text-overflow: ellipsis"
+                            >
+                              {{ team.hourly }}
+                            </p>
+                            <p
+                              v-else-if="sort === 'profit'"
+                              class="text-success text-nowrap m-0 font-weight-bold"
+                              style="overflow: hidden;text-overflow: ellipsis"
+                            >
+                              {{ team.profit }}
+                            </p>
+                          </div>
+                          <p
+                            class="mb-0 text-muted text-nowrap"
+                            style="overflow: hidden;text-overflow: ellipsis"
+                          >
+                            TL: {{ team.team_lead }}
                           </p>
                         </div>
-                        <p class="mb-0 text-muted">TL: {{ team.team_lead }}</p>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </a>
             </div>
           </div>
         </div>
@@ -180,26 +241,41 @@
 </template>
 <style scoped lang="scss">
 .leaderboard__wrapper {
-  max-width: 1400px;
+  padding: 0px 20px;
   margin: 0 auto;
 }
 .leaderboard__ {
   position: relative;
   height: 100vh;
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
   .leaderboard__content {
     min-height: 100%;
   }
   .leaderboard__card_top {
     .leaderboard__number {
-      display: block;
-      font-size: 20px;
+      font-size: 18px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      width: 30px;
+      display: inline-block;
+      text-align: center;
+      line-height: 1.5;
+      background: yellow;
     }
   }
   .leaderboard__card {
-    padding: 10px 20px;
+    padding: 10px 0px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     .leaderboard__number {
-      font-size: 20px;
+      font-size: 18px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      width: 30px;
+      display: block;
+      text-align: center;
+      line-height: 1.5;
+      background: yellow;
     }
   }
 }
@@ -211,325 +287,32 @@ export default {
     avatar: Avatar
   },
   props: {
-    data: {
-      type: Array,
-      default: () => [
-        {
-          bu_id: 5,
-          bu_name: "Soulusi ZH Marketing BU",
-          team_id: 6,
-          team_name: "Soulusi ZH Marketing",
-          team_lead: "Colby",
-          avatar: "https:/upbox.ajt.my/template/img/team/2.png",
-          cost: "RM 4,263.24",
-          revenue: "RM 11,761.40",
-          hourly: "RM 21.30",
-          profit: "RM 7,498.16",
-          hourly_number: 21.3016
-        },
-        {
-          bu_id: 7,
-          bu_name: "Job Ad BU",
-          team_id: 11,
-          team_name: "No. 1 Team - Client Success",
-          team_lead: "Dandy",
-          avatar: "https:/upbox.ajt.my/template/img/team/1.png",
-          cost: "RM 4,571.93",
-          revenue: "RM 19,083.10",
-          hourly: "RM 20.61",
-          profit: "RM 14,511.20",
-          hourly_number: 20.6125
-        },
-        {
-          bu_id: 8,
-          bu_name: "Sonar BU",
-          team_id: 14,
-          team_name: "The Unstoppable",
-          team_lead: "Charmaine",
-          avatar: "https:/upbox.ajt.my/template/img/team/2.png",
-          cost: "RM 4,344.73",
-          revenue: "RM 14,394.00",
-          hourly: "RM 19.03",
-          profit: "RM 10,049.20",
-          hourly_number: 19.0327
-        },
-        {
-          bu_id: 7,
-          bu_name: "Job Ad BU",
-          team_id: 19,
-          team_name: "Chimera",
-          team_lead: "Bryan",
-          avatar: "https:/upbox.ajt.my/template/img/team/2.png",
-          cost: "RM 3,720.09",
-          revenue: "RM 20,130.70",
-          hourly: "RM 18.65",
-          profit: "RM 16,410.60",
-          hourly_number: 18.6484
-        },
-        {
-          bu_id: 6,
-          bu_name: "Soulusi Product BU",
-          team_id: 7,
-          team_name: "Soulusi Product Team",
-          team_lead: "Faiz",
-          avatar: "https:/upbox.ajt.my/template/img/team/2.png",
-          cost: "RM 4,198.45",
-          revenue: "RM 16,001.70",
-          hourly: "RM 16.77",
-          profit: "RM 11,803.20",
-          hourly_number: 16.7659
-        },
-        {
-          bu_id: 4,
-          bu_name: "Soulusi MY Marketing BU",
-          team_id: 5,
-          team_name: "Soulusi MY Marketing",
-          team_lead: "Aiman",
-          avatar: "https:/upbox.ajt.my/template/img/team/2.png",
-          cost: "RM 7,976.07",
-          revenue: "RM 19,038.80",
-          hourly: "RM 15.71",
-          profit: "RM 11,062.70",
-          hourly_number: 15.7141
-        },
-        {
-          bu_id: 10,
-          bu_name: "MK Marketing BU",
-          team_id: 17,
-          team_name: "MK Marketing Team",
-          team_lead: "Iqah",
-          avatar: "https:/upbox.ajt.my/template/img/team/10.png",
-          cost: "RM 3,002.34",
-          revenue: "RM 8,381.64",
-          hourly: "RM 15.28",
-          profit: "RM 5,379.31",
-          hourly_number: 15.2821
-        },
-        {
-          bu_id: 7,
-          bu_name: "Job Ad BU",
-          team_id: 10,
-          team_name: "The Rising Stars",
-          team_lead: "Fauziah",
-          avatar: "https:/upbox.ajt.my/template/img/team/7.png",
-          cost: "RM 6,855.85",
-          revenue: "RM 25,656.10",
-          hourly: "RM 15.26",
-          profit: "RM 18,800.30",
-          hourly_number: 15.26
-        },
-        {
-          bu_id: 17,
-          bu_name: "Creative BU",
-          team_id: 26,
-          team_name: "Creative Team",
-          team_lead: "Rifka",
-          avatar: "https:/upbox.ajt.my/template/img/team/1.png",
-          cost: "RM 2,785.36",
-          revenue: "RM 10,495.60",
-          hourly: "RM 14.60",
-          profit: "RM 7,710.23",
-          hourly_number: 14.6027
-        },
-        {
-          bu_id: 9,
-          bu_name: "RB Marketing BU",
-          team_id: 16,
-          team_name: "RB Marketing Team",
-          team_lead: "Chia",
-          avatar: "https:/upbox.ajt.my/template/img/team/3.png",
-          cost: "RM 4,640.37",
-          revenue: "RM 14,616.80",
-          hourly: "RM 14.17",
-          profit: "RM 9,976.44",
-          hourly_number: 14.1711
-        },
-        {
-          bu_id: 11,
-          bu_name: "AJT Marketing BU",
-          team_id: 18,
-          team_name: "AJT Marketing Team",
-          team_lead: "Sharul",
-          avatar: "https:/upbox.ajt.my/template/img/team/7.png",
-          cost: "RM 2,336.06",
-          revenue: "RM 9,370.00",
-          hourly: "RM 13.32",
-          profit: "RM 7,033.94",
-          hourly_number: 13.3219
-        },
-        {
-          bu_id: 15,
-          bu_name: "Operations BU",
-          team_id: 24,
-          team_name: "Operations Team",
-          team_lead: "Alena",
-          avatar: "https:/upbox.ajt.my/template/img/team/2.png",
-          cost: "RM 3,267.07",
-          revenue: "RM 11,965.00",
-          hourly: "RM 12.36",
-          profit: "RM 8,697.93",
-          hourly_number: 12.355
-        },
-        {
-          bu_id: 7,
-          bu_name: "Job Ad BU",
-          team_id: 9,
-          team_name: "Fire Starter",
-          team_lead: "Ashraf",
-          avatar: "https:/upbox.ajt.my/template/img/team/11.png",
-          cost: "RM 3,157.39",
-          revenue: "RM 9,640.99",
-          hourly: "RM 9.21",
-          profit: "RM 6,483.59",
-          hourly_number: 9.20965
-        },
-        {
-          bu_id: 16,
-          bu_name: "Video MY BU",
-          team_id: 25,
-          team_name: "Video MY Team",
-          team_lead: "Hakimi",
-          avatar: "https:/upbox.ajt.my/template/img/team/8.png",
-          cost: "RM 7,589.11",
-          revenue: "RM 15,349.20",
-          hourly: "RM 7.35",
-          profit: "RM 7,760.09",
-          hourly_number: 7.34857
-        },
-        {
-          bu_id: 7,
-          bu_name: "Job Ad BU",
-          team_id: 20,
-          team_name: "Capitalism Crew",
-          team_lead: "Alex",
-          avatar: "https:/upbox.ajt.my/template/img/team/4.png",
-          cost: "RM 3,420.07",
-          revenue: "RM 7,825.20",
-          hourly: "RM 6.26",
-          profit: "RM 4,405.13",
-          hourly_number: 6.25729
-        },
-        {
-          bu_id: 13,
-          bu_name: "MK/RB Product BU",
-          team_id: 22,
-          team_name: "MK/RB Product Team",
-          team_lead: "Afin",
-          avatar: "https:/upbox.ajt.my/template/img/team/2.png",
-          cost: "RM 34,823.80",
-          revenue: "RM 49,945.80",
-          hourly: "RM 6.14",
-          profit: "RM 15,122.00",
-          hourly_number: 6.13716
-        },
-        {
-          bu_id: 19,
-          bu_name: "HR ID BU",
-          team_id: 28,
-          team_name: "HR ID Team",
-          team_lead: "Sarah Dewi",
-          avatar: "https:/upbox.ajt.my/template/img/team/2.png",
-          cost: "RM 1,875.15",
-          revenue: "RM 4,000.00",
-          hourly: "RM 6.04",
-          profit: "RM 2,124.85",
-          hourly_number: 6.03651
-        },
-        {
-          bu_id: 20,
-          bu_name: "MK ID BU",
-          team_id: 29,
-          team_name: "MK ID Team",
-          team_lead: "Nanda",
-          avatar: "https:/upbox.ajt.my/template/img/team/2.png",
-          cost: "RM 4,547.40",
-          revenue: "RM 9,599.66",
-          hourly: "RM 5.74",
-          profit: "RM 5,052.26",
-          hourly_number: 5.7412
-        },
-        {
-          bu_id: 12,
-          bu_name: "SEO/SEM Marketing BU",
-          team_id: 21,
-          team_name: "SEO/SEM Marketing Team",
-          team_lead: "Willis",
-          avatar: "https:/upbox.ajt.my/template/img/team/6.png",
-          cost: "RM 11,192.10",
-          revenue: "RM 14,159.30",
-          hourly: "RM 4.21",
-          profit: "RM 2,967.22",
-          hourly_number: 4.2148
-        },
-        {
-          bu_id: 14,
-          bu_name: "AJT Product BU",
-          team_id: 23,
-          team_name: "AJT Product Team",
-          team_lead: "Bernie",
-          avatar: "https:/upbox.ajt.my/template/img/team/2.png",
-          cost: "RM 12,645.10",
-          revenue: "RM 12,987.40",
-          hourly: "RM 0.28",
-          profit: "RM 342.33",
-          hourly_number: 0.277865
-        },
-        {
-          bu_id: 8,
-          bu_name: "Sonar BU",
-          team_id: 15,
-          team_name: "Thanos & Family",
-          team_lead: "Louis",
-          avatar: "https:/upbox.ajt.my/template/img/team/8.png",
-          cost: "RM 7,867.94",
-          revenue: "RM 7,873.85",
-          hourly: "RM 0.01",
-          profit: "RM 5.91",
-          hourly_number: 0.0112009
-        },
-        {
-          bu_id: 18,
-          bu_name: "HR MY BU",
-          team_id: 27,
-          team_name: "HR MY Team",
-          team_lead: "Li Peng",
-          avatar: "https:/upbox.ajt.my/template/img/team/2.png",
-          cost: "RM 3,142.03",
-          revenue: "RM 2,000.00",
-          hourly: "RM -1.62",
-          profit: "RM -1,142.03",
-          hourly_number: -1.62221
-        }
-      ]
+    name: String,
+    sortby: {
+      type: String,
+      default: ""
     },
     icon: Object
   },
   data() {
     return {
-      scaleNumber: 1
+      scaleNumber: 1,
+      sorting: this.sortby,
+      buData: []
     };
   },
   mounted: function() {
-    let contentHeight = this.$refs.leaderBoard.offsetHeight;
-    let windowHeight = window.innerHeight;
-    let different = contentHeight - windowHeight;
-    let percent = different / contentHeight;
-    if (window.innerWidth > 1199) {
-      if (contentHeight > windowHeight) {
-        this.scaleNumber = 1 - percent;
-      }
-    }
+    this.handleGetData();
   },
   computed: {
-    scale: function() {
-      return (
-        "transform:scale(" +
-        this.scaleNumber +
-        ")translateX(-50%);transform-origin: 0 0;left: 50%;"
-      );
+    sort: function() {
+      return this.sorting;
+    },
+    board: function() {
+      return this.buData;
     },
     top3: function() {
-      let top3 = this.data.splice(0, 3);
+      let top3 = this.board.splice(0, 3);
       let top_1 = top3[0];
       let top_2 = top3[1];
       let top_3 = top3[2];
@@ -543,10 +326,52 @@ export default {
       return [top_1, top_2, top_3];
     },
     belowTop3: function() {
-      return this.data;
+      return this.board;
+    },
+    scale: function() {
+      return (
+        "transform:scale(" +
+        this.scaleNumber +
+        ")translateX(-50%);transform-origin: 0 0;left: 50%;"
+      );
     }
   },
   methods: {
+    reload: function() {
+      this.handleGetData();
+    },
+    handleGetData: function() {
+      let _this = this;
+      this.buData = [];
+      $.ajax({
+        url: "https://upbox.ajt.my/api/bulist?sortby=" + this.sorting,
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+          if (data.status == "success") {
+            _this.buData = data.data;
+          }
+        }
+      });
+    },
+    handleChangeSort(event) {
+      this.$emit("sortby", event.target.value);
+      this.sorting = event.target.value;
+      this.handleGetData();
+    },
+    handleScale() {
+      this.$nextTick(() => {
+        if (window.innerWidth > 1199) {
+          let contentHeight = this.$refs[this.name].offsetHeight;
+          let windowHeight = window.innerHeight;
+          let different = contentHeight - windowHeight;
+          let percent = different / contentHeight;
+          if (contentHeight > windowHeight) {
+            this.scaleNumber = 1 - percent;
+          }
+        }
+      });
+    },
     handleCountTop3(index) {
       switch (index) {
         case 0:
@@ -558,6 +383,27 @@ export default {
         case 2:
           return 3;
           break;
+      }
+    }
+  },
+  directives: {
+    forCallback(el, binding) {
+      let element = binding.value;
+      let key = element.key;
+      let len = 0;
+
+      if (Array.isArray(element.array)) {
+        len = element.array.length;
+      } else if (typeof element.array === "object") {
+        let keys = Object.keys(element.array);
+        key = keys.indexOf(key);
+        len = keys.length;
+      }
+
+      if (key == len - 1) {
+        if (typeof element.callback === "function") {
+          element.callback();
+        }
       }
     }
   }
